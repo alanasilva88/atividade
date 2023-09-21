@@ -13,9 +13,11 @@ export class AtualizaProdutoComponent implements OnInit {
 
   public produtoId: number = 0;
   public produto: Produto = new Produto(0,"","","",0); 
+  private _activatedRoute: any;
+  private _router: any;
 
-  construtor(private_produtoService: ProdutoService, private _router: Router, private _activatedRoute:ActivatedRoute){
-    this.activatedRoute.params.subscribe(params => this.produtoId = params['id']);
+  constructor (private _produtoService: ProdutoService, private_router: Router, private_activatedRoute:ActivatedRoute){
+    this._activatedRoute.params.subscribe( (params: { [x: string]: number; }) => this.produtoId = params['id']);
   }
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ export class AtualizaProdutoComponent implements OnInit {
       err => {alert("Erro ao atualizar")}
     );
 
-    this._router.nagigate(["restrito/lista"]);
+    this._router.navigate(["restrito/lista"]);
   }
 
 }
